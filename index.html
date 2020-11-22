@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intercom Messenger Demo</title>
+
+
+	<!-- mobile viewport -->
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+
+    <!-- ios webapp - hide safari toolbar -->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+	<meta name="application-name" content="Intercom Messenger Demo"/>
+	<meta name="msapplication-TileColor" content="#FFFFFF" />
+
+	<meta property="og:title" content="Intercom Messenger Demo">
+	<meta property="og:description" content="A demo of the Intercom Messenger">
+	<meta property="og:url" content="https://thewheat.github.io/intercom-messenger-demo">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@thewheat">
+	<meta name="twitter:title" content="Intercom Messenger Demo">
+	<meta name="twitter:url" content="https://thewheat.github.io/intercom-messenger-demo">
+	<meta name="twitter:description" content="A demo of the Intercom Messenger">
+
+	<style>
+		section {
+			border: 1px solid gray;
+			padding: 0.4em 0.8em;
+			margin-bottom: 1em;
+			margin-right: 1em;
+		}
+		h1, h2, h3 {
+			margin: 0;
+		}
+		body {
+			margin: 1em;
+		}
+		.inline {
+			display: inline;
+		}
+
+		section {
+			float: left;
+		}
+	</style>
+</head>
+<body>
+	<h1>Intercom Messenger</h1>
+	<div>
+		<div>Dynamic loading links / Single page app like links 
+			<a href="/#page=page1">Page 1</a>,
+			<a href="/#page=page2">Page 2</a>,
+			<a href="/#page=page3">Page 3</a>
+		</div>
+		<div>
+			Full page reload links / Traditional web page like linkss
+			<a href="/?page=page1">Page 1</a>,
+			<a href="/?page=page2">Page 2</a>,
+			<a href="/?page=page3">Page 3</a>
+		</div>
+	</div>
+	<section>
+		<h3>1) Workspace Details</h3>
+		<section>
+			<div class="form_input"><label>Workspace ID / App ID <select id="workspace_list"></select>
+		</section>
+
+		<section>
+			<div class="form_input"><label>Workspace ID / App ID <input id="workspace_app_id" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Workspace Name <input id="workspace_name" data-lpignore="true"></label></div>
+			<input id="workspace_add" type="button" value="Add Workspace">
+			<input id="workspace_delete" type="button" value="Delete Workspace">
+		</section>
+	</section>
+	<section>
+		<h3>2) After specifying workspace boot a Visitor / User</h3>
+		<section>
+			<h3>a) Visitor</h3>
+			<div class="form_input"><label>Custom Attribute Name <input id="visitor_custom_attribute_name" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Custom Attribute Value <input id="visitor_custom_attribute_val" data-lpignore="true"></label></div>
+			<input id="boot_visitor" class="boot" type="button" value="Boot Visitor">
+			<input id="shutdown_visitor" class="shutdown" type="button" value="Shutdown">
+			<input id="get_visitor_id" type="button" value="Get Visitor ID"> <input id="visitor_id" readonly size="40"></span>
+		</section>
+		<section>
+			<h3>b) User</h3>
+			<div class="form_input"><label>Name <input id="user_name" name="name" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Email <input id="user_email" name="email" data-lpignore="true"></label></div>
+			<div class="form_input"><label>User ID <input id="user_user_id" name="user_id" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Custom Attribute Name <input id="user_custom_attribute_name" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Custom Attribute Value <input id="user_custom_attribute_val" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Company Name <input id="user_company_name" name="company_name" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Company ID <input id="user_company_id" name="company_id" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Company Custom Attribute Name <input id="user_company_custom_attribute_name" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Company Custom Attribute Value <input id="user_company_custom_attribute_val" data-lpignore="true"></label></div>
+			<input id="boot_user" class="boot" type="button" value="Boot User">
+			<input id="shutdown_user" class="shutdown" type="button" value="Shutdown">
+		</section>
+	</section>
+	
+	<section>
+		<h3>3) After booting, you can do any of the following</h3>
+		<section>
+			<h3>a) Update</h3>
+			<div class="form_input"><label>Attribute Name <input id="update_custom_attribute_name" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Attribute Value <input id="update_custom_attribute_val" data-lpignore="true"></label></div>
+			<input id="update" class="boot" type="button" value="Update">
+		</section>
+		<section>
+			<h3>b) Events</h3>
+			<div class="form_input"><label>Event Name <input id="event_name" name="name" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Event Metadata Name <input id="event_metadata_name" data-lpignore="true"></label></div>
+			<div class="form_input"><label>Event Metadata Value <input id="event_metadata_val" data-lpignore="true"></label></div>
+			<input id="track_event" class="boot" type="button" value="Track Event">
+		</section>
+		<section>
+			<h3>c) Messenger</h3>
+			<input id="messenger_show" class="boot" type="button" value="Show">
+			<input id="messenger_hide" class="shutdown" type="button" value="Hide">
+			<input id="messenger_show_messsages" class="boot" type="button" value="Show Messages">
+			<div>
+				<div class="form_input inline"><label>Prefilled text <input id="show_new_messsage_text" data-lpignore="true"></label></div>
+				<input id="messenger_show_new_messsage" class="shutdown" type="button" value="Show New Message">
+			</div>
+			<div>
+				<div class="form_input inline"><label>Tour ID <input id="tour_id" data-lpignore="true"></label></div>
+				<input id="start_tour" type="button" value="Start Tour">
+			</div>
+		</section>
+	</section>
+
+	<script type="text/javascript">
+		var APP_ID = dbGet("forms_workspace_list");
+
+		function elById(id){
+			return document.getElementById(id);
+		}
+
+		function elVal(id, setValue){
+			var el = elById(id);
+			if(typeof(setValue) !== "undefined"	 && el){
+				el.value = setValue;
+			}
+			else {
+				var value = (el || {}).value;
+				dbSaveFormInput(id, value);
+				return value;
+			}
+		}
+
+		function clickById(id, callback){
+			elById(id).addEventListener('click', callback);
+		}
+
+		function changeById(id, callback){
+			elById(id).addEventListener('change', callback);
+		}
+
+		function getUserDetails(){
+			var data = getAppID();
+			["user_name", "user_email", "user_user_id"].forEach(id => {
+				var value = elVal(id);
+				if(value != ""){
+					var key = id.substr("user_".length);
+					data[key] = value;
+				}
+
+			});
+			var caName = elVal("user_custom_attribute_name");
+			var caVal = elVal("user_custom_attribute_val");
+			
+			if(caName != "" && caVal != ""){
+				data[caName] = caVal;
+			}
+
+
+			var company = {};
+			["user_company_name", "user_company_id"].forEach(id => {
+				var value = elVal(id);
+				if(value != ""){
+					var key = id.substr("user_company_".length);
+					company[key] = value;
+				}
+
+			});
+
+			var caName = elVal("user_company_custom_attribute_name");
+			var caVal = elVal("user_company_custom_attribute_val");
+			
+			if(caName != "" && caVal != ""){
+				company[caName] = caVal;
+			}
+
+			if(Object.keys(company).length > 0) {
+				data["company"] = company;
+			}
+			return data;
+		}
+
+		function getVisitorDetails(){
+			var data = getAppID();
+			var caName = elVal("visitor_custom_attribute_name");
+			var caVal = elVal("visitor_custom_attribute_val");
+			
+			if(caName != "" && caVal != ""){
+				data[caName] = caVal;
+			}
+
+			return data;
+		}
+
+		function getUpdateDetails(){
+			var data = {};
+			var caName = elVal("update_custom_attribute_name");
+			var caVal = elVal("update_custom_attribute_val");
+			
+			if(caName != "" && caVal != ""){
+				data[caName] = caVal;
+			}
+
+			return data;
+		}
+
+		function getEventDetails(){
+			var data = {
+				name: elVal("event_name")
+			};
+			var metdataName = elVal("event_metadata_name");
+			var metdataVal = elVal("event_metadata_val");
+			
+			if(metdataName != "" && metdataVal != ""){
+				data["metadata"] = {};
+				data["metadata"][metdataName] = metdataVal;
+			}
+
+			return data;
+		}
+
+		function getAppID(){
+			var name = "workspace_list";
+			var data = elVal(name);
+
+			return { app_id:  data };
+		}
+
+		function dbRestoreWorkspaces(){
+			var list = elById("workspace_list");
+			var workspaces = getWorkspaces();
+
+			while (list.firstChild) {
+			    list.firstChild.remove()
+			}
+
+			if(workspaces) {
+				workspaces.forEach(workspace => {
+					var option = document.createElement("option");
+					option.value = workspace.app_id;
+					option.text = workspace.name + " (app_id: " + option.value + ")";
+					list.appendChild(option);
+				});
+
+				list.value = dbGet("forms_workspace_list");
+				if (list.value === "" && workspaces.length > 0) {
+					list.value = workspaces[0].app_id;
+				}
+			}
+
+		}
+
+		function dbRestore(){
+			Object.keys(localStorage).forEach(key => {
+				if(!key.match(/forms_/)) return;
+				elVal(key.substr("forms_".length), localStorage[key]);
+			})
+			dbRestoreWorkspaces();
+		}
+
+		function dbSaveFormInput(key, value){
+			dbSave("forms_" + key, value);
+		}
+
+		function dbSave(key, value){
+			localStorage.setItem(key, value);
+		}
+
+		function dbGet(key){
+			return localStorage.getItem(key);
+		}
+
+		function getWorkspaces(){
+			return JSON.parse(dbGet("workspaces")) || [];
+		}
+
+		function saveWorkspaces(workspaces){
+			dbSave("workspaces", JSON.stringify(workspaces));
+		}
+
+		function addWorkspace(app_id, name){
+			var workspaces = getWorkspaces();
+			if(!app_id) return;
+
+			var existingWorkspace = workspaces.filter(workspace => { return workspace.app_id == app_id})
+			if(existingWorkspace.length != 0) return;
+
+			workspaces.push({app_id: app_id, name: name || app_id});
+			saveWorkspaces(workspaces);
+			clearWorkspaceDetails();	
+			dbRestoreWorkspaces();
+		}
+
+		function deleteWorkspace(app_id){
+			var workspaces = getWorkspaces();
+			if(!app_id) return;
+
+			var newWorkspaces = workspaces.filter(workspace => { return workspace.app_id != app_id})
+			saveWorkspaces(newWorkspaces);
+			clearWorkspaceDetails();
+			dbRestoreWorkspaces();
+		}
+
+		function clearWorkspaceDetails(){
+			elVal("workspace_app_id", "");
+			elVal("workspace_name", "");
+			elVal("workspace_app_id");
+			elVal("workspace_name");
+		}
+
+		clickById("workspace_add", function(){
+			addWorkspace(elVal("workspace_app_id"), elVal("workspace_name"));
+		});
+
+		clickById("workspace_delete", function(){
+			deleteWorkspace(elVal("workspace_list"));
+		});
+
+		clickById("boot_visitor", function(){
+			var data = getVisitorDetails();
+			console.log("[BOOT] Visitor with data", data);
+			Intercom("boot", data);
+		});
+
+		clickById("get_visitor_id", function(){
+			var data = Intercom("getVisitorId");
+			console.log("[Get visitor ID]", data);
+			elVal("visitor_id", data);
+		});
+
+		clickById("boot_user", function(){
+			var data = getUserDetails();
+			console.log("[BOOT] User with data", data);
+			Intercom("boot", data);
+		});
+
+		clickById("shutdown_user", function(){
+			console.log("[SHUTDOWN]");
+			Intercom("shutdown");
+		});
+
+		clickById("shutdown_visitor", function(){
+			console.log("[SHUTDOWN]");
+			Intercom("shutdown");
+		});
+
+		clickById("shutdown_visitor", function(){
+			console.log("[SHUTDOWN]");
+			Intercom("shutdown");
+		});
+
+		clickById("update", function(){
+			var data = getUpdateDetails();
+			console.log("[Update] Visitor/User with data", data);
+			Intercom("update", data);
+		});
+
+
+
+		clickById("track_event", function(){
+			var data = getEventDetails();
+			console.log("[TRACK EVENT]", data);
+			Intercom("trackEvent", data.name, data.metadata);
+		});
+
+		clickById("messenger_show", function(){
+			console.log("[SHOW]");
+			Intercom("show");
+		});
+
+		clickById("messenger_hide", function(){
+			console.log("[HIDE]");
+			Intercom("hide");
+		});
+
+		clickById("messenger_show_messsages", function(){
+			console.log("[SHOW MESSAGES]");
+			Intercom("showMessages");
+		});
+
+		clickById("messenger_show_new_messsage", function(){
+			var data = elVal('show_new_messsage_text');
+			console.log("[SHOW NEW MESSAGE]", data);
+			Intercom("showNewMessage", data);
+		});
+
+		clickById("start_tour", function(){
+			var data = elVal("tour_id");
+			console.log("[START TOUR] Start tour_id=", data);
+			Intercom("startTour", data);
+		});
+
+		changeById("workspace_list", function(){
+			console.log(elVal("workspace_list"));
+		});
+
+		dbRestore();
+
+	</script>
+	
+</body>
+<script type="text/javascript">(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/' + APP_ID;var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+<script type="text/javascript">
+	Intercom("onHide", function(){
+		console.log("[onHide]");
+	});
+
+	Intercom("onShow", function(){
+		console.log("[onShow]");
+	});
+
+	Intercom("onUnreadCountChange", function(unreadCount){
+		console.log("[onUnreadCountChange] unreadCount=", unreadCount);
+	});
+</script>
+</html>
