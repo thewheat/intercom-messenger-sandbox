@@ -1,5 +1,7 @@
 # Intercom Messenger Sandbox
 
+https://thewheat.github.io/intercom-messenger-sandbox/
+
 - Provides a quick and easy way to test the Intercom Messenger without needing a full install on your website
 - Provides majority of features by just clicking buttons / filling in forms
 - Allows testing multiple workspaces/app_ids
